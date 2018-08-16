@@ -14,6 +14,7 @@ import { SharedService } from './services/shared.service';
 import { SidebarService } from './services/sidebar.service';
 import { AppRoutingModule } from './app.routes';
 import { PagesComponent } from './pages/pages.component';
+import { RegisterComponent } from './login/register.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { PagesComponent } from './pages/pages.component';
     NavbarComponent,
     SidebarComponent,
     BreadcrumbsComponent,
-    PagesComponent
+    PagesComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { Graphic1Component } from './pages/graphic1/graphic1.component';
 import { ProgresComponent } from './pages/progres/progres.component';
 import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component';
+import { RegisterComponent } from './login/register.component';
 
 const appRoutes: Routes = [
     { path: '', component: PagesComponent, children: [
@@ -17,7 +18,7 @@ const appRoutes: Routes = [
         { path: '', pathMatch: 'full',  redirectTo: '/dashboard' }
     ]},
     { path: 'login', component: LoginComponent},
-    { path: 'register', component: LoginComponent},
+    { path: 'register', component: RegisterComponent},
     { path: '**', component: NopagefoundComponent },
 ];
 
