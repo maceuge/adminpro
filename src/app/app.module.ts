@@ -12,6 +12,7 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { BreadcrumbsComponent } from './shared/breadcrumbs/breadcrumbs.component';
 import { SharedService } from './services/shared.service';
 import { SidebarService } from './services/sidebar.service';
+import { AppRoutingModule } from './app.routes';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SidebarService } from './services/sidebar.service';
     BreadcrumbsComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [
     SharedService,
