@@ -13,6 +13,7 @@ import { BreadcrumbsComponent } from './shared/breadcrumbs/breadcrumbs.component
 import { SharedService } from './services/shared.service';
 import { SidebarService } from './services/sidebar.service';
 import { AppRoutingModule } from './app.routes';
+import { PagesComponent } from './pages/pages.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AppRoutingModule } from './app.routes';
     Graphic1Component,
     NavbarComponent,
     SidebarComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    PagesComponent
   ],
   imports: [
     BrowserModule,
