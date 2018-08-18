@@ -13,13 +13,15 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { Graphic1Component } from './graphic1/graphic1.component';
 import { ProgresComponent } from './progres/progres.component';
 import { PagesComponent } from './pages.component';
+import { IncrementComponent } from '../components/increment/increment.component';
 
 @NgModule({
     declarations: [
         DashboardComponent,
         Graphic1Component,
         ProgresComponent,
-        PagesComponent
+        PagesComponent,
+        IncrementComponent
     ],
     exports: [
         DashboardComponent,
@@ -30,7 +32,7 @@ import { PagesComponent } from './pages.component';
     imports: [
         SharedModule,
         PAGES_ROUTE,
-        FormsModule
+        FormsModule,
     ]
 })
 

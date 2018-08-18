@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -15,7 +16,6 @@ import { SidebarService } from './services/sidebar.service';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
-import { APP_ROOT } from '../../node_modules/@angular/core/src/di/scope';
 
 
 
@@ -23,13 +23,13 @@ import { APP_ROOT } from '../../node_modules/@angular/core/src/di/scope';
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
     PagesModule,
     APP_ROUTES,
-    
+    FormsModule
   ],
   providers: [
     SharedService,
