@@ -7,10 +7,7 @@ import { APP_ROUTES } from './app.routes';
 
 // Modulos
 import { PagesModule } from './pages/pages.module';
-
-// Servicios
-import { SharedService } from './services/shared.service';
-import { SidebarService } from './services/sidebar.service';
+import { ServiceModule } from './services/service.module';
 
 // Componentes
 import { AppComponent } from './app.component';
@@ -28,12 +25,10 @@ import { RegisterComponent } from './login/register.component';
     BrowserModule,
     PagesModule,
     APP_ROUTES,
-    FormsModule
+    FormsModule,
+    ServiceModule
   ],
-  providers: [
-    SharedService,
-    SidebarService
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

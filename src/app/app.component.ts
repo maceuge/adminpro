@@ -1,3 +1,4 @@
+import { SettingsService } from './services/service.index';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'adminpro';
+  
+  theme: any = {};
+
+  constructor (private themeSetting: SettingsService) {
+    
+    let link = document.getElementById('theme');
+    this.theme = themeSetting.getThemeSetting();
+    link.setAttribute('href', this.theme.themeUrl);
+
+  }
 }

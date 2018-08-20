@@ -15,6 +15,7 @@ import { ProgresComponent } from './progres/progres.component';
 import { PagesComponent } from './pages.component';
 import { IncrementComponent } from '../components/increment/increment.component';
 import { GraficoDonaComponent } from '../components/grafico-dona/grafico-dona.component';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 @NgModule({
     declarations: [
@@ -23,7 +24,8 @@ import { GraficoDonaComponent } from '../components/grafico-dona/grafico-dona.co
         ProgresComponent,
         PagesComponent,
         IncrementComponent,
-        GraficoDonaComponent
+        GraficoDonaComponent,
+        AccountSettingsComponent
     ],
     exports: [
         DashboardComponent,
