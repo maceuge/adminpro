@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable, Subscriber } from 'rxjs';
-import { retry, map } from 'rxjs/operators';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Observable, Subscriber, Subscription } from 'rxjs';
+import { retry, map, filter } from 'rxjs/operators';
 
 
 declare var swal;
@@ -10,12 +10,15 @@ declare var swal;
   templateUrl: './rxjs.component.html',
   styles: []
 })
-export class RxjsComponent implements OnInit {
+export class RxjsComponent implements OnInit, OnDestroy {
+
+  public valores = 0;
+
+  subscription: Subscription;
 
   constructor() {
     
-
-    this.regresaObservable().pipe(
+    this.subscription = this.regresaObservable().pipe(
        retry(2)
     ).subscribe( 
       data => console.log(data),
@@ -31,13 +34,16 @@ export class RxjsComponent implements OnInit {
       () => {
         console.log('El observador termino');
         swal("Buen Trabajo!", "El observador termino de observar!", "success");
-
       }
     );
 
   }
 
   ngOnInit() {}
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 
   regresaObservable (): Observable<any> {
     let contador = 0;
@@ -55,14 +61,24 @@ export class RxjsComponent implements OnInit {
           //   observer.error('El contador no puede contar hasta 3!');
           //   clearInterval(iter);
           // }
-          if (contador === 5) {
-            clearInterval(iter);
-            observer.complete();
-          }          
+          // if (contador === 5) {
+          //   clearInterval(iter);
+          //   observer.complete();
+          // } 
+
       }, 1000);
     }).pipe(
       map (data => {
-        return data.valor;
+        return this.valores = data.valor;
+      }),
+      filter ( (valor, index) => {
+        
+        if ( (valor % 2) === 1 ) {
+          return true;
+        } else {
+          return false;
+        }
+        
       })
     );
   }

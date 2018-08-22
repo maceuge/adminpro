@@ -12,12 +12,12 @@ import { RxjsComponent } from "./rxjs/rxjs.component";
 
 const pagesRoutes: Routes = [
     { path: '', component: PagesComponent, children: [
-        { path: 'dashboard', component: DashboardComponent },
-        { path: 'graphic1', component: Graphic1Component},
-        { path: 'progress', component: ProgresComponent},
-        { path: 'configuracion', component: AccountSettingsComponent},
-        { path: 'promesas', component: PromesasComponent},
-        { path: 'rxjs', component: RxjsComponent},
+        { path: 'dashboard', component: DashboardComponent, data: {titulo: 'Dashboard'} },
+        { path: 'graphic1', component: Graphic1Component, data: {titulo: 'Graficos'} },
+        { path: 'progress', component: ProgresComponent, data: {titulo: 'Barra de Progreso'} },
+        { path: 'configuracion', component: AccountSettingsComponent, data: {titulo: 'Configuracion'} },
+        { path: 'promesas', component: PromesasComponent, data: {titulo: 'Promesas'} },
+        { path: 'rxjs', component: RxjsComponent, data: {titulo: 'Observables'} },
         { path: '', pathMatch: 'full',  redirectTo: '/dashboard' }
     ]},
 
