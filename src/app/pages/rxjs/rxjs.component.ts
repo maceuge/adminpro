@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscriber, Subscription } from 'rxjs';
 import { retry, map, filter } from 'rxjs/operators';
+import swal from 'sweetalert';
 
 
-declare var swal;
+//declare var swal;
 
 @Component({
   selector: 'app-rxjs',
@@ -27,8 +28,7 @@ export class RxjsComponent implements OnInit, OnDestroy {
         swal({   
           title: "Ohh Noo!",   
           text: error,   
-          type: "danger",   
-          showCancelButton: true
+          icon: "danger"
         });
       },
       () => {
@@ -61,25 +61,25 @@ export class RxjsComponent implements OnInit, OnDestroy {
           //   observer.error('El contador no puede contar hasta 3!');
           //   clearInterval(iter);
           // }
-          // if (contador === 5) {
-          //   clearInterval(iter);
-          //   observer.complete();
-          // } 
+          if (contador === 7) {
+            clearInterval(iter);
+            observer.complete();
+          } 
 
       }, 1000);
     }).pipe(
       map (data => {
         return this.valores = data.valor;
       }),
-      filter ( (valor, index) => {
+      // filter ( (valor, index) => {
         
-        if ( (valor % 2) === 1 ) {
-          return true;
-        } else {
-          return false;
-        }
+      //   if ( (valor % 2) === 1 ) {
+      //     return true;
+      //   } else {
+      //     return false;
+      //   }
         
-      })
+      // })
     );
   }
 

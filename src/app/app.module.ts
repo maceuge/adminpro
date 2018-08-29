@@ -1,6 +1,6 @@
-import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Rutas
 import { APP_ROUTES } from './app.routes';
@@ -26,7 +26,8 @@ import { RegisterComponent } from './login/register.component';
     PagesModule,
     APP_ROUTES,
     FormsModule,
-    ServiceModule
+    ServiceModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
