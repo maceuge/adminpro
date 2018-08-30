@@ -67,10 +67,11 @@ export class RxjsComponent implements OnInit, OnDestroy {
           } 
 
       }, 1000);
-    }).pipe(
-      map (data => {
-        return this.valores = data.valor;
-      }),
+    }
+    // .pipe(
+    //   map (data => {
+    //     return this.valores = data.valor;
+    //   }),
       // filter ( (valor, index) => {
         
       //   if ( (valor % 2) === 1 ) {

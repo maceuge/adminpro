@@ -11,19 +11,34 @@ import swal from 'sweetalert';
 })
 export class UsuarioService {
 
-  constructor(public _http: HttpClient) { 
-    console.log('Soy el servicio del USUARIO');
-
-  }
+  constructor(public _http: HttpClient) { }
 
   crearUsuario ( usuario: Usuario ) {
     let url = URL_SERVICE + '/usuario';
     return this._http.post( url, usuario).pipe(
         map ( (data: any) => {
-          swal('Usuario Creado', usuario.email, 'success');
+          swal(`Bienvenid@ ${usuario.nombre}`, `Ahora podes ingresar al sistema con tu correo ${usuario.email}`, 'success');
           return data.usuario;
         })
     );
   }
+
+  login ( usuario: Usuario, recordame: boolean) {
+    if (recordame) {
+      localStorage.setItem('email', usuario.email);
+    } else {
+      localStorage.removeItem('email');
+    }
+    let url = URL_SERVICE + '/login';
+    return this._http.post( url, usuario).pipe(
+      map ( (data: any) => {
+        localStorage.setItem('id', data.id);
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('usuario', JSON.stringify(data.usuario));
+
+        return true;
+      })
+  );
+}
 
 }
