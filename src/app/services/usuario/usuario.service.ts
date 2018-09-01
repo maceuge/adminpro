@@ -4,6 +4,7 @@ import { URL_SERVICE } from '../../config/config';
 import { Usuario } from '../../models/usuario.model';
 import { map } from 'rxjs/operators';
 import swal from 'sweetalert';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -14,7 +15,8 @@ export class UsuarioService {
   usuario: Usuario;
   token: string;
 
-  constructor(public _http: HttpClient) { 
+  constructor(public _http: HttpClient,
+              private _router: Router) { 
     this.storeDataFromLocalStorage();
   }
   
@@ -68,9 +70,14 @@ export class UsuarioService {
   }
 
   logout() {
+    this.usuario = null;
+    this.token = '';
+
     localStorage.removeItem('id');
     localStorage.removeItem('token');
     localStorage.removeItem('usuario');
+
+    this._router.navigate(['/login']);
   }
 
   saveToLocalStorage(id: string, token: string, usuario: Usuario) {

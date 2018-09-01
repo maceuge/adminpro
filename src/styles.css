@@ -9,3 +9,7 @@
 .swal-text {
     text-align: center;
 }
+
+.pointer-mouse {
+    cursor: pointer;
+}

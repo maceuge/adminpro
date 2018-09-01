@@ -14,7 +14,7 @@
                         <li><a href="javascript:void()">Mi Balance</a></li>
                         <li><a href="javascript:void()">Mensajes</a></li>
                         <li><a routerLinkActive="active" routerLink="/configuracion">Configuracion</a></li>
-                        <li><a routerLink="/login">Salir</a></li>
+                        <li><a class="pointer-mouse" (click)="logout()">Salir</a></li>
                     </ul>
                 </li>
                 <li class="nav-devider"></li>
@@ -24,11 +24,13 @@
                     <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
                         <i [class]="menu.icon"></i>
                         <span class="hide-menu">{{ menu.title }} 
-                        <span class="label label-rouded label-themecolor pull-right">{{menu.submenu.length}}</span>
+                            <span class="label label-rouded label-themecolor pull-right">{{menu.submenu.length}}</span>
                         </span>
                     </a>
-                    <ul *ngFor="let submenu of menu.submenu" aria-expanded="false" class="collapse">
-                        <li><a routerLinkActive="active" [routerLink]="[submenu.url]">{{ submenu.title }}</a></li>
+                    <ul aria-expanded="false" class="collapse">
+                        <li *ngFor="let submenu of menu.submenu">
+                            <a routerLinkActive="active" [routerLink]="[submenu.url]">{{ submenu.title }}</a>
+                        </li>
                     </ul>
                 </li>
 
