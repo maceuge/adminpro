@@ -114,4 +114,9 @@ export class UsuarioService {
         });
   }
 
+  getUsers (pages: number = 0) {
+    let url = URL_SERVICE + '/usuario?page=' + pages;
+    return this._http.get(url);
+  }
+
 }
