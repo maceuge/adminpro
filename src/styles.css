@@ -13,3 +13,17 @@
 .pointer-mouse {
     cursor: pointer;
 }
+
+.card-title {
+    text-align: center;
+}
+
+.card-subtitle {
+    text-align: center;
+}
+
+.img-profile-center {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}

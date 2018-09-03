@@ -88,4 +88,15 @@ export class UsuarioService {
     this.token = token;
   }
 
+  updateUser( usuario: Usuario ) {
+    let url = URL_SERVICE + '/usuario/' + usuario._id;
+        url += '?token=' + this.token;
+    return this._http.put(url, usuario).pipe(
+      map ((user: any) => {
+        this.saveToLocalStorage(user._id, this.token, user.usuario);
+        return true;
+      })
+    );
+  }
+
 }
