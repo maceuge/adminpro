@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
 
 //Module
 import { SharedModule } from '../shared/shared.module';
@@ -47,7 +49,8 @@ import { ProfileComponent } from './profile/profile.component';
         PAGES_ROUTE,
         FormsModule,
         ChartsModule,
-        PipesModule
+        PipesModule,
+        CommonModule
     ]
 })
 

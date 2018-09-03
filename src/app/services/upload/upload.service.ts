@@ -18,8 +18,8 @@ export class UploadService {
         // se puede jugar con la variable ajax para hacer la barra del progreso
         if (ajax.readyState === 4) {
           if (ajax.status === 200) {
-            console.log('Imagen Subida');
-            resolve(ajax.response);  
+            //console.log('Imagen Subida');
+            resolve( JSON.parse(ajax.response) );  
           } else {
             console.log('Fallo en subir imagen');
             reject(ajax.response);

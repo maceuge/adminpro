@@ -5,6 +5,7 @@ import { Usuario } from '../../models/usuario.model';
 import { map } from 'rxjs/operators';
 import swal from 'sweetalert';
 import { Router } from '@angular/router';
+import { UploadService } from '../upload/upload.service';
 
 
 @Injectable({
@@ -16,7 +17,9 @@ export class UsuarioService {
   token: string;
 
   constructor(public _http: HttpClient,
-              private _router: Router) { 
+              private _router: Router,
+              private _uploadServ: UploadService) { 
+
     this.storeDataFromLocalStorage();
   }
   
@@ -97,6 +100,18 @@ export class UsuarioService {
         return true;
       })
     );
+  }
+
+  uploadImage (file: File, id: string) {
+    this._uploadServ.uploadFile(file, 'usuario', id)
+        .then( (data: any) => {
+          this.usuario.img = data.usuario.img;
+          this.saveToLocalStorage(id, this.token, this.usuario);
+          swal('Foto de Perfil Actualizado', 'La nueva foto de perfil fue actualizada con exito!', 'success');
+        })
+        .catch( err => {
+          console.log('Fallo al subir el archivo', err);
+        });
   }
 
 }

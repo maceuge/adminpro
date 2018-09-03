@@ -12,6 +12,7 @@ export class ProfileComponent implements OnInit {
 
   usuario: Usuario;
   imgToUpload: File;
+  tempImage: string | ArrayBuffer;
 
   constructor(private _userServ: UsuarioService) {
     this.usuario = this._userServ.usuario;
@@ -39,7 +40,20 @@ export class ProfileComponent implements OnInit {
       this.imgToUpload = null;
       return;
     }
+    if (file.type.indexOf('image') < 0) {
+      swal('Imagen no Valida', 'Hey! Solo se permiten cargar imagenes!', 'error');
+      this.imgToUpload = null;
+      return;
+    }
+    let reader = new FileReader();
+    let urlTempImage = reader.readAsDataURL(file);
+        reader.onloadend = () => this.tempImage = reader.result;
+
     this.imgToUpload = file;
+  }
+
+  updateImage () {
+    this._userServ.uploadImage(this.imgToUpload, this.usuario._id);
   }
 
 }
