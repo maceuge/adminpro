@@ -4,16 +4,16 @@
 <div class="row animated fadeIn">
     <div class="col-12">
         <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Buscar Usuario</h4>
-                <input class="form-control" type="text" #input placeholder="Buscar Usuario">
+            <div class="card-body form-material">
+                <!-- <h4 class="card-title">Buscar Usuario</h4> -->
+                <input class="form-control" type="text" #input placeholder="Buscar Usuario" (keyup)="searchUser(input.value)">
             </div>
         </div>
     </div>
 </div>
 
 <!-- Spinner -->
-<div class="row animated fadeIn" *ngIf="!usuarios">
+<div class="row animated fadeIn" *ngIf="loading">
     <div class="col-md-12">
         <div class="card">
             <div class="card-body text-center">
@@ -25,11 +25,11 @@
 </div>
 
 <!-- Table -->
-<div class="row animated fadeIn" *ngIf="usuarios">
+<div class="row animated fadeIn" *ngIf="usuarios.length > 0">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Lista de Usuarios</h4>
+                <h4 class="card-title">Lista de Usuarios <span class="label label-light-success">{{ totalReg }}</span></h4>
 
                 <div class="table-responsive">
                     <table class="table">
@@ -44,17 +44,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let usuario of usuarios">
+                            <tr *ngFor="let usuario of usuarios" [ngClass]="{'table-active': this.userId === usuario._id}">
                                 <td> <img [src]="usuario.img | imagen" alt="user" width="40" class="img-circle"> </td>
                                 <td> {{ usuario.nombre }} </td>
                                 <td> {{ usuario.email }} </td>
-                                <td> {{ usuario.role }} </td>
-                                <td> {{ usuario.google }} </td>
                                 <td>
-                                    <button type="button" class="btn btn-primary mr-2">
+                                    <select [(ngModel)]="usuario.role" class="form-control" name="role">
+                                        <option value="ADMIN_ROLE">ADMIN_ROLE</option>
+                                        <option value="USER_ROLE">USER_ROLE</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <span *ngIf="usuario.google" class="label label-info">Google</span>
+                                    <span *ngIf="!usuario.google" class="label label-success">Weblog</span>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-primary mr-2" (click)="saveRole(usuario)">
                                     <i class="fa fa-save"></i>
                                   </button>
-                                    <button type="button" class="btn btn-danger">
+                                    <button type="button" [disabled]="usuario._id === userId" class="btn btn-danger" (click)="deleteUserRegister(usuario)">
                                     <i class="fa fa-trash"></i>
                                   </button>
                                 </td>
@@ -63,11 +71,26 @@
                         </tbody>
                     </table>
                 </div>
-                <div>
-                  <button (click)="nextPage(-5)" type="button" class="btn btn-primary mr-3">Anteriores</button>
-                  <button (click)="nextPage(5)" type="button" class="btn btn-success">Proximos</button>
+                <div class="float-right">
+                    <button (click)="nextPage(-5)" type="button" class="btn btn-primary mr-3"><i class="fa fa-angle-double-left"></i></button>
+                    <button (click)="nextPage(5)" type="button" class="btn btn-primary"><i class="fa fa-angle-double-right"></i></button>
                 </div>
 
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="usuarios.length <= 0">
+    <div class="col-md-12">
+        <div class="card card-inverse card-success">
+            <div class="card-header">
+                <h4 class="m-b-0 text-white">Notificacion del Buscador</h4>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Registros no encontados</h3>
+                <p class="card-text text-center">La palabra <span class="text-success font-bold">{{ searchWord }}</span> que corresponde a un elemento buscado, no se encontro en nuesta base de datos.</p>
+                <!-- <a href="#" class="btn btn-inverse">Go somewhere</a> -->
             </div>
         </div>
     </div>

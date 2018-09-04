@@ -119,4 +119,18 @@ export class UsuarioService {
     return this._http.get(url);
   }
 
+  searchUser ( word: string ) {
+     let url = `${ URL_SERVICE }/busqueda/coleccion/usuario/${ word }`;
+     return this._http.get(url);
+  }
+
+  deleteUser (id: string ) {
+    let url = `${URL_SERVICE}/usuario/${ id }?token=${ this.token }`;
+    return this._http.delete(url).pipe(
+      map( (data: any) => {
+        return data.usuario;
+      })
+    );
+  }
+
 }

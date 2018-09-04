@@ -2,12 +2,18 @@
 
 .swal-button-container {
     margin: 0px auto;
-    display: table;
+    /* display: grid; */
+    display: inline-table;
     position: relative;
 }
 
 .swal-text {
     text-align: center;
+}
+
+.swal-button--cancel {
+    /* margin-bottom: 15px; */
+    margin-right: 15px;
 }
 
 .pointer-mouse {
