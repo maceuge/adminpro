@@ -96,7 +96,9 @@ export class UsuarioService {
         url += '?token=' + this.token;
     return this._http.put(url, usuario).pipe(
       map ((user: any) => {
-        this.saveToLocalStorage(user._id, this.token, user.usuario);
+        if (usuario._id === this.usuario._id) {
+          this.saveToLocalStorage(user.usuario._id, this.token, user.usuario);
+        }
         return true;
       })
     );

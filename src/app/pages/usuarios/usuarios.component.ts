@@ -83,10 +83,10 @@ export class UsuariosComponent implements OnInit {
   }
 
   saveRole (usuario: Usuario) {
-    console.log(usuario);
+    //console.log(usuario);
     this._userServ.updateUser(usuario).subscribe( data => {
       this.loadUsers();
-      swal('Cambio de ROLE', `El Usuario ${usuario.nombre} ahora es ${usuario.role}!`, 'success');
+      swal('Cambio de ROL', `El Usuario ${usuario.nombre} ahora es ${usuario.role}!`, 'success');
     });
     
   }

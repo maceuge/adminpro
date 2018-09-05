@@ -107,14 +107,14 @@
                 <!-- 3er tab -->
                 <div class="tab-pane active" id="image_upload" role="tabpanel">
                     <div class="card-body">
-                        <div class="col-md-12">
-                            <img class="img-fluid" *ngIf="!tempImage" [src]="usuario.img | imagen" />
-                            <img class="img-fluid" *ngIf="tempImage" [src]="tempImage" />
+                        <div class="col-md-12 text-center">
+                            <img class="img-fluid" width="300" *ngIf="!tempImage" [src]="usuario.img | imagen" />
+                            <img class="img-fluid" width="300" *ngIf="tempImage" [src]="tempImage" />
                         </div>
                         <hr>
                         <!-- Input File -->
                         <div class="form-group form-material">
-                            <label class="col-md-12">Seleccionar Imagen</label>
+                            <!-- <label class="col-md-12">Seleccionar Imagen</label> -->
                             <div class="fileinput fileinput-new input-group col-md-12" data-provides="fileinput">
                                 <div class="form-control" data-trigger="fileinput">
                                     <i class="glyphicon glyphicon-file fileinput-exists"></i>
