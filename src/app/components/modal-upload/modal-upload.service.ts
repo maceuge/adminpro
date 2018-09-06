@@ -11,10 +11,7 @@ export class ModalUploadService {
 
   notificacion = new EventEmitter<any>();
 
-  constructor() { 
-    console.log('Modal Upload Service!');
-    
-  }
+  constructor() {}
 
   showModal (id: string, tipo: string) {
     this.hidenModal = 'show show-modal';

@@ -1,0 +1,89 @@
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body form-material">
+                <!-- <h4 class="card-title">Buscar Usuario</h4> -->
+                <input class="form-control" type="text" #input placeholder="Buscar Hospital" (keyup)="buscarHospital(input.value)">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Spinner -->
+<div class="row animated fadeIn" *ngIf="loading">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="fa fa-spinner fa-spin fa-2x"></i> <br>
+                <span>Cargando...</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Table -->
+<div class="row animated fadeIn" *ngIf="hospitales.length > 0">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Lista de Usuarios <span class="label label-light-success">{{ hospitales.length }}</span></h4>
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Foto</th>
+                                <th>Nombre</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let hospital of hospitales">
+                                <td>
+                                    <!-- (click)="openModal(usuario._id)" -->
+                                    <img [src]="hospital.img | imagen" alt="user" width="40" class="img-circle pointer-mouse">
+                                </td>
+                                <td>
+                                    <!-- {{ hospital.nombre }} -->
+                                    <div class=" form-material">
+                                        <input type="text" class="form-control" name="hospital" [(ngModel)]="hospital.nombre" placeholder="Nombre del Hospital">
+                                    </div>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-primary mr-2">
+                                  <i class="fa fa-save"></i>
+                                </button>
+                                    <button (click)="eliminarHospital(hospital._id)" type="button" class="btn btn-danger">
+                                  <i class="fa fa-trash"></i>
+                                </button>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="hospitales.length <= 0">
+    <div class="col-md-12">
+        <div class="card card-inverse card-success">
+            <div class="card-header">
+                <h4 class="m-b-0 text-white">Notificacion del Buscador</h4>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Registros no encontados</h3>
+                <p class="card-text text-center">La palabra <span class="text-success font-bold">palabra de busqueda</span> que corresponde a un elemento buscado, no se encontro en nuesta base de datos.</p>
+                <!-- <a href="#" class="btn btn-inverse">Go somewhere</a> -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End PAge Content -->
+<!-- ============================================================== -->
