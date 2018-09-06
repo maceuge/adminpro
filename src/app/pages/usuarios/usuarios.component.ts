@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../models/usuario.model';
 import { UsuarioService } from '../../services/service.index';
 import swal from 'sweetalert';
-
+import { ModalUploadService } from '../../components/modal-upload/modal-upload.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -18,12 +18,20 @@ export class UsuariosComponent implements OnInit {
   loading: boolean;
   searchWord: string = '';
 
-  constructor(private _userServ: UsuarioService) {
+  constructor(private _userServ: UsuarioService,
+              public _mdUpSrv: ModalUploadService) {
       this.userId = localStorage.getItem('id');
   }
 
   ngOnInit() {
     this.loadUsers();
+    this._mdUpSrv.notificacion.subscribe( resp => {
+      this.loadUsers();
+    });
+  }
+
+  openModal(id: string ) {
+    this._mdUpSrv.showModal(id, 'usuario');
   }
 
   loadUsers () {
