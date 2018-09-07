@@ -10,7 +10,8 @@ import {
   SidebarService, 
   UsuarioService, 
   UploadService, 
-  HospitalService 
+  HospitalService,
+  MedicoService 
 } from './service.index';
 
 
@@ -29,7 +30,8 @@ import {
     LoginGuardGuard,
     UploadService,
     ModalUploadService,
-    HospitalService
+    HospitalService,
+    MedicoService
   ]
 })
 

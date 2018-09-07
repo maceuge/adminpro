@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Hospital } from '../../models/hospital.model';
 import { HospitalService } from '../../services/service.index';
 import { ModalUploadService } from '../../components/modal-upload/modal-upload.service';
+import { Observable, Subscriber, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-hospitales',
   templateUrl: './hospitales.component.html',
   styles: []
 })
-export class HospitalesComponent implements OnInit {
+export class HospitalesComponent implements OnInit, OnDestroy {
 
   loading: boolean;
   hospitales: Hospital[] = [];
@@ -16,14 +17,43 @@ export class HospitalesComponent implements OnInit {
   totalHosp: number;
   pages: number = 0;
 
+  subscription: Subscription;
+
   constructor(private _hospServ: HospitalService,
-              private _modUpServ: ModalUploadService) { }
+              private _modUpServ: ModalUploadService) { 
+
+                this.subscription = this.observarCambios().subscribe( 
+                  data => { 
+                    this.hospitales = data;
+                   },
+                  error => { console.log(error); }
+            );
+
+              }
 
   ngOnInit() {
-    this.cargarHospitales();
+    //this.cargarHospitales();
     this._modUpServ.notificacion.subscribe( data => {
       this.cargarHospitales();
     });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  // Observables
+  observarCambios (): Observable<any> {
+      return new Observable( (observer: Subscriber<any>) => {
+        
+        let iterval = setInterval( () => {
+          this._hospServ.obtenerHospitales(this.pages).subscribe( (data: any) => {     
+            let hospitales: Hospital[] = data.hospital;
+            observer.next(hospitales);
+          });
+        }, 1000);
+
+      });
   }
 
   openModal (id: string) {
@@ -82,6 +112,7 @@ export class HospitalesComponent implements OnInit {
     .then((willDelete) => {
       if (willDelete) {
         this._hospServ.borrarHospital(id).subscribe( (data: any) => {
+          this.pages = 0;
           this.cargarHospitales();
           swal('Hospital Eliminado', `El hospital ${data.hospital.nombre} fue eliminado con exito!`, 'success');
         });

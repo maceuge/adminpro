@@ -1,0 +1,93 @@
+<!-- ============================================================== -->
+<!-- Pagina de Medicos -->
+<!-- ============================================================== -->
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body form-material">
+                <!-- <h4 class="card-title">Buscar Usuario</h4> -->
+                <input class="form-control" type="text" #input placeholder="Buscar Medico..." (keyup)="buscarMedico(input.value)">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Spinner -->
+<div class="row animated fadeIn" *ngIf="loading">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="fa fa-spinner fa-spin fa-2x"></i> <br>
+                <span>Cargando...</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Table -->
+<div class="row animated fadeIn" *ngIf="medicos.length > 0">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title text-left">Lista de Medicos <span class="label label-light-success">{{ totalMedicos }}</span>
+                    <button [routerLink]="['/medico', 'nuevo']" type="button" class="btn btn-info btn-sm btn-rounded float-right"> 
+                        <i class="fa fa-plus-circle"></i> Crear Medico
+                    </button>
+                </h4>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Foto</th>
+                                <th>Medico</th>
+                                <th>Hospital</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let medico of medicos">
+                                <td>
+                                    <img (click)="openModal(medico._id)" [src]="medico.img | imagen:'medico'" alt="hosp" width="40" class="img-circle pointer-mouse">
+                                </td>
+                                <td>
+                                    {{ medico.nombre }}
+                                </td>
+                                <td>
+                                    {{ medico.hospital.nombre }}
+                                </td>
+                                <td>
+                                    <button [routerLink]="['/medico', medico._id]" type="button" class="btn btn-primary mr-2">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button (click)="borrarMedico(medico._id, medico.nombre)" type="button" class="btn btn-danger">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- <div class="float-right">
+                    <button (click)="nextPage(-5)" type="button" class="btn btn-primary mr-3"><i class="fa fa-angle-double-left"></i></button>
+                    <button (click)="nextPage(5)" type="button" class="btn btn-primary"><i class="fa fa-angle-double-right"></i></button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="medicos.length <= 0">
+    <div class="col-md-12">
+        <div class="card card-inverse card-success">
+            <div class="card-header">
+                <h4 class="m-b-0 text-white">Notificacion del Buscador</h4>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Registros no encontados</h3>
+                <p class="card-text text-center">La palabra <span class="text-success font-bold"> {{ terminoBuscado }} </span> que corresponde a un elemento buscado, no se encontro en nuesta base de datos.</p>
+                <!-- <a href="#" class="btn btn-inverse">Go somewhere</a> -->
+            </div>
+        </div>
+    </div>
+</div>
