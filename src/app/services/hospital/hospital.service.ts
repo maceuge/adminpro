@@ -14,8 +14,8 @@ export class HospitalService {
     this.token = localStorage.getItem('token');
   }
 
-  obtenerHospitales () {
-    let url = `${URL_SERVICE}/hospital`;
+  obtenerHospitales (page: number) {
+    let url = `${URL_SERVICE}/hospital?page=${page}`;
     return this._http.get(url);
   }
 
@@ -30,8 +30,8 @@ export class HospitalService {
   }
 
   crearHospital (nombre: string) {
-    let url = `${URL_SERVICE}/hospital?token=${this.token}`;
-    return this._http.post(url, nombre);
+    let url = `${URL_SERVICE}/hospital?token=${this.token}`;    
+    return this._http.post(url, { nombre });
   }
 
   buscarHospital (termino: string) {

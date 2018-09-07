@@ -32,6 +32,6 @@ export class SettingsService {
 }
 
 interface ThemeSettings {
-  themeUrl: string,
-  theme: string
+  themeUrl: string;
+  theme: string;
 }

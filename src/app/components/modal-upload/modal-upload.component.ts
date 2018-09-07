@@ -9,8 +9,6 @@ import { ModalUploadService } from './modal-upload.service';
 })
 export class ModalUploadComponent implements OnInit {
 
-  //modalState: string = 'show show-modal';
-
   imgToUpload: File;
   tempImage: string | ArrayBuffer;
 
@@ -29,13 +27,11 @@ export class ModalUploadComponent implements OnInit {
   uploadImage () {
     this._uploadService.uploadFile(this.imgToUpload, this._mdUpSev.tipo, this._mdUpSev.id)
         .then( (resp: any) => {
-            //console.log(resp);
             this._mdUpSev.notificacion.emit( resp );
-            this._mdUpSev.hideModal();
-            swal('Imagen Actualizada', `La nueva imagen de ${resp.usuario.nombre} se actualizo correctamente! Se ve muy bien!`, 'success');
+            this.closeModal();
+            swal('Imagen Actualizada', `La nueva imagen se actualizo correctamente! Se ve muy bien!`, 'success');
         })
         .catch( err => {
-            //console.log('No se pudo cargar imagen', err);
             swal('Error', 'No se pudo cargar la imagen', 'error');
         });
     
