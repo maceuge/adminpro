@@ -22,39 +22,39 @@ export class HospitalesComponent implements OnInit, OnDestroy {
   constructor(private _hospServ: HospitalService,
               private _modUpServ: ModalUploadService) { 
 
-                this.subscription = this.observarCambios().subscribe( 
-                  data => { 
-                    this.hospitales = data;
-                   },
-                  error => { console.log(error); }
-            );
+            //     this.subscription = this.observarCambios().subscribe( 
+            //       data => { 
+            //         this.hospitales = data;
+            //        },
+            //       error => { console.log(error); }
+            // );
 
               }
 
   ngOnInit() {
-    //this.cargarHospitales();
+    this.cargarHospitales();
     this._modUpServ.notificacion.subscribe( data => {
       this.cargarHospitales();
     });
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    // this.subscription.unsubscribe();
   }
 
   // Observables
-  observarCambios (): Observable<any> {
-      return new Observable( (observer: Subscriber<any>) => {
+  // observarCambios (): Observable<any> {
+  //     return new Observable( (observer: Subscriber<any>) => {
         
-        let iterval = setInterval( () => {
-          this._hospServ.obtenerHospitales(this.pages).subscribe( (data: any) => {     
-            let hospitales: Hospital[] = data.hospital;
-            observer.next(hospitales);
-          });
-        }, 1000);
+  //       let iterval = setInterval( () => {
+  //         this._hospServ.obtenerHospitales(this.pages).subscribe( (data: any) => {     
+  //           let hospitales: Hospital[] = data.hospital;
+  //           observer.next(hospitales);
+  //         });
+  //       }, 1000);
 
-      });
-  }
+  //     });
+  // }
 
   openModal (id: string) {
     this._modUpServ.showModal(id, 'hospital');

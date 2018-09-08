@@ -14,6 +14,11 @@ export class HospitalService {
     this.token = localStorage.getItem('token');
   }
 
+  obtenerHospitalesSinPaginacion () {
+    let url = `${URL_SERVICE}/hospital`;
+    return this._http.get(url);
+  }
+
   obtenerHospitales (page: number) {
     let url = `${URL_SERVICE}/hospital?page=${page}`;
     return this._http.get(url);

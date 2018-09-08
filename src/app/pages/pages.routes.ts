@@ -28,7 +28,7 @@ const pagesRoutes: Routes = [
         { path: 'usuarios', component: UsuariosComponent, data: {titulo: 'Administracion de Usuarios'} },
         { path: 'hospitales', component: HospitalesComponent, data: {titulo: 'Administracion de Hospitales'} },
         { path: 'medicos', component: MedicosComponent, data: {titulo: 'Administracion de Medicos'} },
-        { path: 'medico/:id', component: MedicoComponent, data: {titulo: 'Actualizar Medico'} },
+        { path: 'medico/:id', component: MedicoComponent, data: {titulo: 'Perfil Medico'} },
         { path: '', pathMatch: 'full',  redirectTo: '/dashboard' }
     ]},
 

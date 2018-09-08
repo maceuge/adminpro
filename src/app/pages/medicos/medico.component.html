@@ -1,3 +1,73 @@
-<p>
-  medico works!
-</p>
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<!-- Row -->
+<div class="row  animated fadeIn">
+  <!-- Column -->
+  <div class="col-lg-6 col-xlg-3 col-md-6">
+      <div class="card">
+          <div class="card-body">
+
+              <div class="m-t-30" *ngIf="medico._id">
+                  <a class="image-popup-no-margins"  title="">
+                      <img [src]="medico.img | imagen:'medico'"  class="img-circle img-profile-center" width="150" />
+                  </a>
+                  <h4 class="card-title m-t-10"> {{medico.nombre}} </h4>
+                  <h6 class="card-subtitle"> {{hospital?.nombre}} </h6>
+              </div>
+
+          </div>
+          <div>
+              <hr> 
+          </div>
+          <div class="card-body"> 
+              <div class="card-title"> {{ title }} </div>
+
+              <form class="form-horizontal m-t-40" #forma="ngForm" (ngSubmit)="crearMedico(forma)" autocomplete="off" ngNativeValidate>
+                  <div class="form-group">
+                      <label class="col-md-12">Nombre</label>
+                      <div class="col-md-12">
+                          <input type="text" class="form-control" [(ngModel)]="medico.nombre" name="nombre" placeholder="Nombre Medico" required>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label class="col-md-12">Hospital</label>
+                      <div class="col-md-12">
+                          <select (change)="obtenerHospital($event.target.value)" class="form-control" [(ngModel)]="medico.hospital" name="hospital" required>
+                            <option [selected]="true" value=""> Seleccione un Hospital </option>
+                            <option *ngFor="let hospital of hospitales" [value]="hospital._id"> {{ hospital.nombre }} </option>
+                          </select>
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                      <div class="col-sm-12">
+                        <div class="float-right">
+                          <a [routerLink]="['/medicos']" class="btn btn-danger mr-3"><i class="fa fa-times-circle"></i> Cancelar</a>
+                          <button type="submit" [disabled]="!forma.valid" class="btn btn-success"><i class="fa fa-save"></i> {{estadoBoton}}</button>                       
+                        </div>
+                      </div>
+                  </div>
+              </form>
+
+          </div>
+      </div>
+  </div>
+
+  <!-- Column -->
+  <div class="col-lg-6 col-md-6" *ngIf="hospital">
+      <div class="card">
+          <img class="card-img-top img-responsive" [src]="hospital.img | imagen:'hospital'" alt="Card image cap">
+          <div class="card-body">
+              <h4 class="card-title"> {{ hospital.nombre }} </h4>
+              <p class="card-text">El Hospital {{ hospital.nombre }} fue elegido para el medico {{ medico.nombre }} por su excelete desempeño!</p>
+              
+          </div>
+      </div>
+  </div>
+
+</div>
+<!-- Row -->
+<!-- ============================================================== -->
+<!-- End PAge Content -->
+<!-- ============================================================== -->
