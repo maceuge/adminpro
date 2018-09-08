@@ -15,7 +15,7 @@ export class HospitalService {
   }
 
   obtenerHospitalesSinPaginacion () {
-    let url = `${URL_SERVICE}/hospital`;
+    let url = `${URL_SERVICE}/hospital/todos`;
     return this._http.get(url);
   }
 
