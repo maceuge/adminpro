@@ -1,0 +1,103 @@
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<!-- <div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                Busqueda Works! Buscaste: {{ termino }}
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="row animated fadeIn">
+
+    <div class="col-md-12">
+        <h4 class="card-title">Resultados de Busqueda</h4>
+        <h6 class="card-subtitle m-b-20 text-muted">Hemos buscado en toda nuesta base de datos y encontramos esto: </h6>
+    </div>
+    <!-- Column -->
+    <div class="col-md-6 col-lg-4 col-xlg-4">
+        <div class="card">
+            <div class="box bg-info text-center">
+                <h1 class="font-light text-white"> {{ total_usuarios }} </h1>
+                <h6 class="text-white">Usuarios</h6>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+    <div class="col-md-6 col-lg-4 col-xlg-4">
+        <div class="card">
+            <div class="box bg-primary text-center">
+                <h1 class="font-light text-white"> {{ total_medicos }} </h1>
+                <h6 class="text-white">Medicos</h6>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+    <div class="col-md-6 col-lg-4 col-xlg-4">
+        <div class="card">
+            <div class="box bg-success text-center">
+                <h1 class="font-light text-white"> {{ total_hospitales }} </h1>
+                <h6 class="text-white">Hospitales</h6>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="row el-element-overlay animated fadeIn">
+
+    <div class="col-lg-3 col-md-4" *ngFor="let usuario of usuarios">
+        <div class="card">
+            <div class="el-card-item">
+                <div class="el-card-avatar el-overlay-1">
+                    <a class="image-popup-vertical-fit" [href]="usuario.img | imagen"> <img [src]="usuario.img | imagen" alt="user"> </a>
+                </div>
+                <div class="el-card-content">
+                    <h3 class="box-title"> {{ usuario.nombre }} </h3> <small> {{ usuario.role }} </small>
+                    <br> 
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Usuario -->
+
+    <!-- Medico -->
+    <div class="col-lg-3 col-md-4" *ngFor="let medico of medicos">
+        <div class="card">
+            <div class="el-card-item">
+                <div class="el-card-avatar el-overlay-1">
+                    <a class="image-popup-vertical-fit" [href]="medico.img | imagen:'medico'"> <img [src]="medico.img | imagen:'medico'" alt="user"> </a>
+                </div>
+                <div class="el-card-content">
+                    <h3 class="box-title"> {{ medico.nombre }} </h3> <small> {{ medico.hospital.nombre }} </small>
+                    <br> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hospitales -->
+    <div class="col-lg-3 col-md-4" *ngFor="let hospital of hospitales">
+        <div class="card">
+            <div class="el-card-item">
+                <div class="el-card-avatar el-overlay-1">
+                    <a class="image-popup-vertical-fit" [href]="hospital.img | imagen:'hospital'"> <img [src]="hospital.img | imagen:'hospital'" alt="user"> </a>
+                </div>
+                <div class="el-card-content">
+                    <h3 class="box-title"> {{ hospital.nombre }} </h3> <small> {{ hospital.usuario.nombre }} </small>
+                    <br> 
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<!-- ============================================================== -->
+<!-- End PAge Content -->
+<!-- ============================================================== -->

@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UsuarioService } from '../services/service.index';
 import { Usuario } from '../models/usuario.model';
+import swal from 'sweetalert';
+
 
 declare function init_plugin();
 declare const gapi: any;
@@ -73,7 +75,13 @@ export class LoginComponent implements OnInit {
     }
     let usuario = new Usuario(null, this.loginForm.value.correo, this.loginForm.value.password);
     this._userServ.login(usuario, this.loginForm.value.recordarme)
-                  .subscribe( login => this.router.navigate(['/dashboard']));
+                  .subscribe( 
+                    login => this.router.navigate(['/dashboard']),
+                    (err: any) => {
+                      console.log('Status Server: ' + err.status);
+                      swal('Credenciales Incorrectas', `${err.error.message}`, 'error');
+                    }
+    );
   }
 
 }

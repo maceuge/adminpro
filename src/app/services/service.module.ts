@@ -11,9 +11,10 @@ import {
   UsuarioService, 
   UploadService, 
   HospitalService,
-  MedicoService 
+  MedicoService,
+  SearchService,
+  AdminGuard 
 } from './service.index';
-
 
 
 @NgModule({
@@ -31,7 +32,9 @@ import {
     UploadService,
     ModalUploadService,
     HospitalService,
-    MedicoService
+    MedicoService,
+    SearchService,
+    AdminGuard
   ]
 })
 

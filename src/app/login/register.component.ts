@@ -72,14 +72,13 @@ export class RegisterComponent implements OnInit {
       this.forma.value.pass
     );
 
-    this.userService.crearUsuario(usuario).subscribe( data => {
-      this._router.navigate(['/login']);
-    });
+    this.userService.crearUsuario(usuario).subscribe( 
+      data => { this._router.navigate(['/login']); },
+      (err: any) => {
+        swal(err.error.message, err.error.errors.errors.email.message, 'error');
+      }
+    );
 
-      //console.log(this.forma.value);
-      //console.log('Estado Forma: ', this.forma.valid);
-      //console.log(this.forma.errors);
-  
   }
 
   resetForm () {
