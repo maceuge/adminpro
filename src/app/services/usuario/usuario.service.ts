@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICE } from '../../config/config';
 import { Usuario } from '../../models/usuario.model';
-import swal from 'sweetalert';
 import { Router } from '@angular/router';
 import { UploadService } from '../upload/upload.service';
-
 import { map } from 'rxjs/operators';
+import swal from 'sweetalert';
+import { DOCUMENT } from '@angular/common';
 
 
 @Injectable({
@@ -20,7 +20,8 @@ export class UsuarioService {
 
   constructor(public _http: HttpClient,
               private _router: Router,
-              private _uploadServ: UploadService) { 
+              private _uploadServ: UploadService,
+              @Inject(DOCUMENT) private _doc,) { 
 
     this.storeDataFromLocalStorage();
   }
@@ -35,6 +36,12 @@ export class UsuarioService {
       this.usuario = null;
       this.menu = [];
     }
+  }
+
+  setTheme () {
+    let theme = localStorage.getItem('theme');
+    let url = `assets/css/colors/${theme}.css`;
+    this._doc.getElementById('theme').setAttribute('href', url);
   }
 
   isLogin () {
@@ -55,7 +62,7 @@ export class UsuarioService {
     let url = URL_SERVICE + '/login/google';
     return this._http.post(url, {token}).pipe(
       map( (data: any) => {   
-        this.saveToLocalStorage(data.id, data.token, data.usuario, data.menu);
+        this.saveToLocalStorage(data.id, data.token, data.usuario, data.menu, data.usuario.theme);
         return true;
       })
     );
@@ -69,8 +76,9 @@ export class UsuarioService {
     }
     let url = URL_SERVICE + '/login';
     return this._http.post( url, usuario).pipe(
-      map ( (data: any) => {
-        this.saveToLocalStorage(data.id, data.token, data.usuario, data.menu);    
+      map ( (data: any) => {    
+        this.saveToLocalStorage(data.id, data.token, data.usuario, data.menu, data.usuario.theme);
+        this.setTheme(data.usuario.theme);    
         return true;
       })
     );
@@ -85,23 +93,24 @@ export class UsuarioService {
     localStorage.removeItem('token');
     localStorage.removeItem('usuario');
     localStorage.removeItem('menu');
-
+    localStorage.removeItem('theme');
     this._router.navigate(['/login']);
   }
 
-  saveToLocalStorage(id: string, token: string, usuario: Usuario, menu: any) {
+  saveToLocalStorage(id: string, token: string, usuario: Usuario, menu: any, theme?: string) {
     localStorage.setItem('id', id);
     localStorage.setItem('token', token);
     localStorage.setItem('usuario', JSON.stringify(usuario));
     localStorage.setItem('menu', JSON.stringify(menu));
+    localStorage.setItem('theme', theme);
     this.usuario = usuario;
     this.token = token;
     this.menu = menu;
   }
 
   updateUser( usuario: Usuario ) {
-    let url = URL_SERVICE + '/usuario/' + usuario._id;
-        url += '?token=' + this.token;
+    let url = `${URL_SERVICE}/usuario/${usuario._id}?token=${this.token}`;
+
     return this._http.put(url, usuario).pipe(
       map ((user: any) => {
         if (usuario._id === this.usuario._id) {

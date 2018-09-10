@@ -1,37 +1,46 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
+import { UsuarioService } from '../usuario/usuario.service';
+import { DOCUMENT } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SettingsService {
 
-  themeSet: ThemeSettings = {
-    themeUrl: 'assets/css/colors/default.css',
-    theme: 'default'
-  }
+  theme: string;
 
-  constructor() {}
+  constructor(@Inject(DOCUMENT) private _doc,
+              private _userService: UsuarioService) {
+    this.setTheme(localStorage.getItem('theme'));   
+  }
 
   saveThemeSettings () {
-    localStorage.setItem('theme', JSON.stringify(this.themeSet));
+    let usuario = JSON.parse(localStorage.getItem('usuario'));
+    usuario.theme = this.theme;
+    this._userService.updateUser(usuario).subscribe( data => {
+      console.log(data); 
+    });
   }
 
-  getThemeSetting () {
+  getThemeSelected () {
     if (localStorage.getItem('theme')) {
-      this.themeSet = JSON.parse(localStorage.getItem('theme'));
+      this.theme = localStorage.getItem('theme');
     }
-    return this.themeSet;
+    return this.theme;
+  }
+
+  getTheme () {
+    let url = `assets/css/colors/${this.theme}.css`;
+    return url;
   }
 
   setTheme (theme: string) {
-    this.themeSet.themeUrl = `assets/css/colors/${theme}.css`;
-    this.themeSet.theme = theme;
+    this.theme = theme;
+    let url = `assets/css/colors/${theme}.css`;
+    this._doc.getElementById('theme').setAttribute('href', url);
+    localStorage.setItem('theme', theme);
     this.saveThemeSettings();
   }
 
 }
 
-interface ThemeSettings {
-  themeUrl: string;
-  theme: string;
-}
