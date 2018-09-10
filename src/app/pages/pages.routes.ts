@@ -1,13 +1,13 @@
 import { Routes, RouterModule } from "@angular/router";
 
-import { PagesComponent } from "./pages.component";
+//import { PagesComponent } from "./pages.component";
+import { LoginGuardGuard, AdminGuard } from "../services/service.index";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { Graphic1Component } from "./graphic1/graphic1.component";
 import { ProgresComponent } from "./progres/progres.component";
 import { AccountSettingsComponent } from "./account-settings/account-settings.component";
 import { PromesasComponent } from "./promesas/promesas.component";
 import { RxjsComponent } from "./rxjs/rxjs.component";
-import { LoginGuardGuard, AdminGuard } from "../services/service.index";
 import { ProfileComponent } from "./profile/profile.component";
 import { UsuariosComponent } from "./usuarios/usuarios.component";
 import { HospitalesComponent } from "./hospitales/hospitales.component";
@@ -18,7 +18,7 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
 
 
 const pagesRoutes: Routes = [
-    { path: '', component: PagesComponent, canActivate: [LoginGuardGuard] , children: [
+   // { path: '', component: PagesComponent, canActivate: [LoginGuardGuard] , children: [
         { path: 'dashboard', component: DashboardComponent, data: {titulo: 'Dashboard'} },
         { path: 'graphic1', component: Graphic1Component, data: {titulo: 'Graficos'} },
         { path: 'progress', component: ProgresComponent, data: {titulo: 'Barra de Progreso'} },
@@ -32,7 +32,7 @@ const pagesRoutes: Routes = [
         { path: 'medico/:id', component: MedicoComponent, data: {titulo: 'Perfil Medico'} },
         { path: 'busqueda/:termino', component: BusquedaComponent, data: {titulo: 'Resultados de Busqueda'} },
         { path: '', pathMatch: 'full',  redirectTo: '/dashboard' }
-    ]},
+   // ]},
 
 ];
 

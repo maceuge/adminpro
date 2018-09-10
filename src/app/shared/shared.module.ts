@@ -7,13 +7,15 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
+import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
 
 @NgModule({
    declarations: [
        BreadcrumbsComponent,
        NavbarComponent,
        SidebarComponent,
-       NopagefoundComponent
+       NopagefoundComponent,
+       ModalUploadComponent
    ],
    imports: [
        CommonModule,
@@ -24,7 +26,8 @@ import { NopagefoundComponent } from './nopagefound/nopagefound.component';
        BreadcrumbsComponent,
        NavbarComponent,
        SidebarComponent,
-       NopagefoundComponent
+       NopagefoundComponent,
+       ModalUploadComponent
    ]
 })
 
