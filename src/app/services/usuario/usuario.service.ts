@@ -17,6 +17,7 @@ export class UsuarioService {
   usuario: Usuario;
   token: string;
   menu: any[] = [];
+  theme: string;
 
   constructor(public _http: HttpClient,
               private _router: Router,
@@ -31,16 +32,17 @@ export class UsuarioService {
       this.token = localStorage.getItem('token');
       this.usuario = JSON.parse(localStorage.getItem('usuario'));
       this.menu = JSON.parse(localStorage.getItem('menu'));
+      this.theme = localStorage.getItem('theme');
     } else {
       this.token = '';
       this.usuario = null;
       this.menu = [];
+      this.theme = 'default';
     }
   }
 
   setTheme () {
-    let theme = localStorage.getItem('theme');
-    let url = `assets/css/colors/${theme}.css`;
+    let url = `assets/css/colors/${this.theme}.css`;
     this._doc.getElementById('theme').setAttribute('href', url);
   }
 
@@ -78,7 +80,7 @@ export class UsuarioService {
     return this._http.post( url, usuario).pipe(
       map ( (data: any) => {    
         this.saveToLocalStorage(data.id, data.token, data.usuario, data.menu, data.usuario.theme);
-        this.setTheme(data.usuario.theme);    
+        this.setTheme();    
         return true;
       })
     );
@@ -88,6 +90,7 @@ export class UsuarioService {
     this.usuario = null;
     this.token = '';
     this.menu = [];
+    this.theme = 'default';
 
     localStorage.removeItem('id');
     localStorage.removeItem('token');
@@ -106,6 +109,7 @@ export class UsuarioService {
     this.usuario = usuario;
     this.token = token;
     this.menu = menu;
+    this.theme = theme;  
   }
 
   updateUser( usuario: Usuario ) {

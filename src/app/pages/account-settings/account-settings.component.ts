@@ -30,7 +30,7 @@ export class AccountSettingsComponent implements OnInit {
 
   private putChek () {
     let selectors: any = document.getElementsByClassName('selector');
-    let themeSet = this.themeSetting.getThemeSelected();
+    let themeSet = localStorage.getItem('theme');
     for (let select of selectors) {
       if (select.getAttribute('data-theme') === themeSet) {
         select.classList.add('working');
