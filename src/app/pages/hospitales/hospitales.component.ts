@@ -13,7 +13,7 @@ export class HospitalesComponent implements OnInit, OnDestroy {
 
   loading: boolean;
   hospitales: Hospital[] = [];
-  terminoBuscado: string;
+  terminoBuscado: string = '';
   totalHosp: number;
   pages: number = 0;
 

@@ -11,9 +11,10 @@ import { ModalUploadService } from '../../components/modal-upload/modal-upload.s
 export class MedicosComponent implements OnInit {
 
   loading: boolean;
-  terminoBuscado: string;
+  terminoBuscado: string = '';
   medicos: Medico[] = [];
   totalMedicos: number = 0;
+  pages: number = 0;
 
   constructor(private _medServ: MedicoService,
               private _modUpSer: ModalUploadService) { }
@@ -71,6 +72,18 @@ export class MedicosComponent implements OnInit {
 
   openModal(id: string) {
     this._modUpSer.showModal(id, 'medico');
+  }
+
+  nextPage (page: number) {
+    let pagin = this.pages + page;
+    if (pagin >= this.totalMedicos) {
+      return;
+    }
+    if (pagin < 0) {
+      return;
+    }
+    this.pages += page;
+    this.cargarMedicos();
   }
 
 }

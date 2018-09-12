@@ -65,6 +65,7 @@ export class UsuarioService {
     return this._http.post(url, {token}).pipe(
       map( (data: any) => {   
         this.saveToLocalStorage(data.id, data.token, data.usuario, data.menu, data.usuario.theme);
+        this.setTheme();
         return true;
       })
     );

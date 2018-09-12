@@ -25,16 +25,27 @@
 </div>
 
 <!-- Table -->
-<div class="row animated fadeIn" *ngIf="medicos.length > 0">
+<div class="row animated fadeIn">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title text-left">Lista de Medicos <span class="label label-light-success">{{ totalMedicos }}</span>
+                <h4 class="card-title text-left">Lista de Medicos <span class="label label-info">{{ totalMedicos }}</span>
                     <button [routerLink]="['/medico', 'nuevo']" type="button" class="btn btn-info btn-sm btn-rounded float-right"> 
                         <i class="fa fa-plus-circle"></i> Crear Medico
                     </button>
                 </h4>
-                <div class="table-responsive">
+
+                <div class="card-body" *ngIf="medicos.length <= 0">
+                    <h3 class="card-title">Registros no encontados</h3>
+                    <p *ngIf="terminoBuscado.length <= 0" class="card-text text-center">Aun no tiene ninigun Medico creado.
+                    </p>
+                    <p *ngIf="terminoBuscado.length > 0" class="card-text text-center">La palabra
+                        <span class="text-success font-bold"> {{ terminoBuscado }} 
+                        </span> que corresponde a un elemento buscado, no se encontro en nuesta base de datos.
+                    </p>
+                </div>
+
+                <div class="table-responsive" *ngIf="medicos.length > 0">
                     <table class="table">
                         <thead>
                             <tr>
@@ -68,25 +79,10 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- <div class="float-right">
-                    <button (click)="nextPage(-5)" type="button" class="btn btn-primary mr-3"><i class="fa fa-angle-double-left"></i></button>
-                    <button (click)="nextPage(5)" type="button" class="btn btn-primary"><i class="fa fa-angle-double-right"></i></button>
-                </div> -->
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row" *ngIf="medicos.length <= 0">
-    <div class="col-md-12">
-        <div class="card card-inverse card-success">
-            <div class="card-header">
-                <h4 class="m-b-0 text-white">Notificacion del Buscador</h4>
-            </div>
-            <div class="card-body">
-                <h3 class="card-title">Registros no encontados</h3>
-                <p class="card-text text-center">La palabra <span class="text-success font-bold"> {{ terminoBuscado }} </span> que corresponde a un elemento buscado, no se encontro en nuesta base de datos.</p>
-                <!-- <a href="#" class="btn btn-inverse">Go somewhere</a> -->
+                <div class="float-right">
+                    <button (click)="nextPage(-10)" type="button" class="btn btn-primary mr-3"><i class="fa fa-angle-double-left"></i></button>
+                    <button (click)="nextPage(10)" type="button" class="btn btn-primary"><i class="fa fa-angle-double-right"></i></button>
+                </div>
             </div>
         </div>
     </div>
