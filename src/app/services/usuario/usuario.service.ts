@@ -118,7 +118,7 @@ export class UsuarioService {
     return this._http.put(url, usuario).pipe(
       map ((user: any) => {
         if (usuario._id === this.usuario._id) {
-          this.saveToLocalStorage(user.usuario._id, this.token, user.usuario, this.menu);
+          this.saveToLocalStorage(user.usuario._id, this.token, user.usuario, this.menu, this.theme);
         }
         return true;
       })
@@ -129,7 +129,7 @@ export class UsuarioService {
     this._uploadServ.uploadFile(file, 'usuario', id)
         .then( (data: any) => {
           this.usuario.img = data.usuario.img;
-          this.saveToLocalStorage(id, this.token, this.usuario, this.menu);
+          this.saveToLocalStorage(id, this.token, this.usuario, this.menu, this.theme);
           swal('Foto de Perfil Actualizado', 'La nueva foto de perfil fue actualizada con exito!', 'success');
         })
         .catch( err => {
