@@ -6,15 +6,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { APP_ROUTES } from './app.routes';
 
 // Modulos
-import { PagesModule } from './pages/pages.module';
 import { ServiceModule } from './services/service.module';
+import { SharedModule } from './shared/shared.module';
+
+
 
 // Componentes
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
 import { PagesComponent } from './pages/pages.component';
-import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -30,7 +31,7 @@ import { SharedModule } from './shared/shared.module';
     FormsModule,
     ServiceModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginGuardGuard } from './service.index';
 import { ModalUploadService } from '../components/modal-upload/modal-upload.service';
 
+
 import { 
   SettingsService, 
   SharedService, 
@@ -13,14 +14,15 @@ import {
   HospitalService,
   MedicoService,
   SearchService,
-  AdminGuard 
+  AdminGuard,
+  DashboardService 
 } from './service.index';
 
 
 @NgModule({
   imports: [
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   declarations: [],
   providers: [
@@ -34,7 +36,8 @@ import {
     HospitalService,
     MedicoService,
     SearchService,
-    AdminGuard
+    AdminGuard,
+    DashboardService,
   ]
 })
 
