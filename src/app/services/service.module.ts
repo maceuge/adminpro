@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginGuardGuard } from './service.index';
 import { ModalUploadService } from '../components/modal-upload/modal-upload.service';
 
-
 import { 
   SettingsService, 
   SharedService, 
@@ -15,7 +14,8 @@ import {
   MedicoService,
   SearchService,
   AdminGuard,
-  DashboardService 
+  DashboardService,
+  VerificaTokenGuard  
 } from './service.index';
 
 
@@ -38,6 +38,7 @@ import {
     SearchService,
     AdminGuard,
     DashboardService,
+    VerificaTokenGuard
   ]
 })
 

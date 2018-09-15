@@ -1,7 +1,7 @@
 import { Routes, RouterModule } from "@angular/router";
 
 //import { PagesComponent } from "./pages.component";
-import { LoginGuardGuard, AdminGuard } from "../services/service.index";
+import { LoginGuardGuard, AdminGuard, VerificaTokenGuard } from "../services/service.index";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { Graphic1Component } from "./graphic1/graphic1.component";
 import { ProgresComponent } from "./progres/progres.component";
@@ -19,7 +19,7 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
 
 const pagesRoutes: Routes = [
    // { path: '', component: PagesComponent, canActivate: [LoginGuardGuard] , children: [
-        { path: 'dashboard', component: DashboardComponent, data: {titulo: 'Dashboard'} },
+        { path: 'dashboard', component: DashboardComponent, canActivate: [VerificaTokenGuard], data: {titulo: 'Dashboard'} },
         { path: 'graphic1', component: Graphic1Component, data: {titulo: 'Graficos'} },
         { path: 'progress', component: ProgresComponent, data: {titulo: 'Barra de Progreso'} },
         { path: 'configuracion', component: AccountSettingsComponent, data: {titulo: 'Configuracion'} },

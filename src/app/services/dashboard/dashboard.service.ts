@@ -9,20 +9,15 @@ import { URL_SERVICE } from '../../config/config';
 })
 export class DashboardService {
 
-  socket;
-
   constructor() { 
-    this.socket = io.connect(URL_SERVICE);
   }
 
-
-  getMessageFromServer (): Observable<any> { 
-    return new Observable( (observer: Subscriber<any>) => {
-        this.socket.on('messages', (messages) => {
-            observer.next(messages);
-            console.log('Msg: ', messages);  
-        });
-    });
+  // getMessageFromServer (): Observable<any> { 
+  //   return new Observable( (observer: Subscriber<any>) => {
+  //       this.socket.on('messages', (messages) => {
+  //           observer.next(messages);
+  //           console.log('Msg: ', messages);  
+  //       });
+  //   });
 }
 
-}

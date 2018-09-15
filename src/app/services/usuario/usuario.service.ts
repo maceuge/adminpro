@@ -41,6 +41,16 @@ export class UsuarioService {
     }
   }
 
+  renovarToken () {
+    let url = `${URL_SERVICE}/login/renuevatoken?token=${this.token}`;
+    return this._http.get(url).pipe( map ( (data: any) => {
+      this.token = data.token;
+      localStorage.setItem('token', this.token);
+      return true;
+    }));
+  }
+
+
   setTheme () {
     let url = `assets/css/colors/${this.theme}.css`;
     this._doc.getElementById('theme').setAttribute('href', url);
