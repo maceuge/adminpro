@@ -5,7 +5,6 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body form-material">
-                <!-- <h4 class="card-title">Buscar Usuario</h4> -->
                 <input class="form-control" type="text" #input placeholder="Buscar Usuario" (keyup)="searchUser(input.value)">
             </div>
         </div>
@@ -25,13 +24,23 @@
 </div>
 
 <!-- Table -->
-<div class="row animated fadeIn" *ngIf="usuarios.length > 0">
+<div class="row animated fadeIn" *ngIf="!loading">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Lista de Usuarios <span class="label label-light-success">{{ totalReg }}</span></h4>
 
-                <div class="table-responsive">
+                <div class="card-body" *ngIf="usuarios.length <= 0">
+                    <h3 class="card-title">Registros no encontados</h3>
+                    <p *ngIf="terminoBuscado.length <= 0" class="card-text text-center">Aun no tiene ninigun Usuario creado.
+                    </p>
+                    <p *ngIf="terminoBuscado.length > 0" class="card-text text-center">La palabra
+                        <span class="text-success font-bold"> {{ terminoBuscado }} 
+                        </span> que corresponde a un elemento buscado, no se encontro en nuesta base de datos.
+                    </p>
+                </div>
+
+                <div class="table-responsive" *ngIf="usuarios.length > 0">
                     <table class="table">
                         <thead>
                             <tr>
@@ -80,20 +89,6 @@
     </div>
 </div>
 
-<div class="row" *ngIf="usuarios.length <= 0">
-    <div class="col-md-12">
-        <div class="card card-inverse card-success">
-            <div class="card-header">
-                <h4 class="m-b-0 text-white">Notificacion del Buscador</h4>
-            </div>
-            <div class="card-body">
-                <h3 class="card-title">Registros no encontados</h3>
-                <p class="card-text text-center">La palabra <span class="text-success font-bold">{{ searchWord }}</span> que corresponde a un elemento buscado, no se encontro en nuesta base de datos.</p>
-                <!-- <a href="#" class="btn btn-inverse">Go somewhere</a> -->
-            </div>
-        </div>
-    </div>
-</div>
 <!-- ============================================================== -->
 <!-- End PAge Content -->
 <!-- ============================================================== -->

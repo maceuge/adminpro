@@ -7,7 +7,7 @@
             <div class="card-body">
                 Dashboard Works!
             </div>
-            <div class="card-body">
+            <div class="card-body" *ngIf="message">
                 Mensaje por {{message.nombre}}:  {{ message.mensaje }}
             </div>
         </div>

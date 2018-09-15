@@ -1,15 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Hospital } from '../../models/hospital.model';
 import { HospitalService } from '../../services/service.index';
 import { ModalUploadService } from '../../components/modal-upload/modal-upload.service';
-import { Observable, Subscriber, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-hospitales',
   templateUrl: './hospitales.component.html',
   styles: []
 })
-export class HospitalesComponent implements OnInit, OnDestroy {
+export class HospitalesComponent implements OnInit {
 
   loading: boolean;
   hospitales: Hospital[] = [];
@@ -17,19 +16,9 @@ export class HospitalesComponent implements OnInit, OnDestroy {
   totalHosp: number;
   pages: number = 0;
 
-  subscription: Subscription;
-
   constructor(private _hospServ: HospitalService,
               private _modUpServ: ModalUploadService) { 
-
-            //     this.subscription = this.observarCambios().subscribe( 
-            //       data => { 
-            //         this.hospitales = data;
-            //        },
-            //       error => { console.log(error); }
-            // );
-
-              }
+  }
 
   ngOnInit() {
     this.cargarHospitales();
@@ -37,24 +26,6 @@ export class HospitalesComponent implements OnInit, OnDestroy {
       this.cargarHospitales();
     });
   }
-
-  ngOnDestroy() {
-    // this.subscription.unsubscribe();
-  }
-
-  // Observables
-  // observarCambios (): Observable<any> {
-  //     return new Observable( (observer: Subscriber<any>) => {
-        
-  //       let iterval = setInterval( () => {
-  //         this._hospServ.obtenerHospitales(this.pages).subscribe( (data: any) => {     
-  //           let hospitales: Hospital[] = data.hospital;
-  //           observer.next(hospitales);
-  //         });
-  //       }, 1000);
-
-  //     });
-  // }
 
   openModal (id: string) {
     this._modUpServ.showModal(id, 'hospital');

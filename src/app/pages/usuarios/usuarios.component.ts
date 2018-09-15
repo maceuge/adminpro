@@ -16,7 +16,7 @@ export class UsuariosComponent implements OnInit {
   totalReg: number = 0;
   userId: string;
   loading: boolean;
-  searchWord: string = '';
+  terminoBuscado: string = '';
 
   constructor(private _userServ: UsuarioService,
               public _mdUpSrv: ModalUploadService) {
@@ -57,7 +57,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   searchUser( word: string) {
-    this.searchWord = word;
+    this.terminoBuscado = word;
  
     if (word.length <= 0) {
       this.loadUsers();

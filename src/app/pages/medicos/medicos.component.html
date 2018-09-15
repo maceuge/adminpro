@@ -5,7 +5,6 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body form-material">
-                <!-- <h4 class="card-title">Buscar Usuario</h4> -->
                 <input class="form-control" type="text" #input placeholder="Buscar Medico..." (keyup)="buscarMedico(input.value)">
             </div>
         </div>
@@ -25,7 +24,7 @@
 </div>
 
 <!-- Table -->
-<div class="row animated fadeIn">
+<div class="row animated fadeIn" *ngIf="!loading">
     <div class="col-12">
         <div class="card">
             <div class="card-body">

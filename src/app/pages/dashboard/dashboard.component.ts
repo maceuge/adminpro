@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../../services/service.index';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,17 +9,21 @@ import { DashboardService } from '../../services/service.index';
 })
 export class DashboardComponent implements OnInit {
 
-  message: string ='';
+  message: string;
 
   constructor(private _dashServ: DashboardService) { 
-    this._dashServ.getMessageFromServer().subscribe( data => {
-      console.log(data);
-      this.message = data;
-    });
+    
   }
 
   ngOnInit() {
-    
+    this.getSoketData(); 
+  }
+
+  getSoketData () {
+    this._dashServ.getMessageFromServer().subscribe( data => {
+      this.message = data;
+    });
+    console.log('Estoy dentro del componente dashboard');  
   }
 
 }
