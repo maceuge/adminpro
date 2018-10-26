@@ -33,13 +33,14 @@ export class RegisterComponent implements OnInit {
       validators: this.validarPassIguales('pass', 'pass2')
     });
 
-    this.forma.setValue({
-      nombre: 'User',
-      correo: 'user@gmail.com',
-      pass: '123456',
-      pass2: '123456',
-      termino: false
-    });
+    // Injectar data para pruebas
+    // this.forma.setValue({
+    //   nombre: 'User',
+    //   correo: 'user@gmail.com',
+    //   pass: '123456',
+    //   pass2: '123456',
+    //   termino: false
+    // });
 
   }
 

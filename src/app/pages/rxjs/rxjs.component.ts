@@ -22,7 +22,10 @@ export class RxjsComponent implements OnInit, OnDestroy {
     this.subscription = this.regresaObservable().pipe(
        retry(2)
     ).subscribe( 
-      data => console.log(data),
+      (data) => {
+        console.log(data);
+        this.valores = data;
+      },
       error => {
         console.error('Hay noo! Esto fallo! :P', error);
         swal({   
@@ -56,7 +59,7 @@ export class RxjsComponent implements OnInit, OnDestroy {
             valor: contador
           };
 
-          observer.next(salida);
+          observer.next(salida.valor);
           // if (contador === 3) {
           //   observer.error('El contador no puede contar hasta 3!');
           //   clearInterval(iter);

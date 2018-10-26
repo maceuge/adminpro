@@ -4,10 +4,6 @@
 
 export const environment = {
   production: false,
-  pusher: {
-    key: '0b51b592195d4a29c792',
-    cluster: 'us2',
-  }
 };
 
 /*

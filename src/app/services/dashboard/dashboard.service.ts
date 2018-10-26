@@ -15,9 +15,14 @@ export class DashboardService {
   statusChannel: any;
   userChannel: any;
 
+  pusherData: {
+    key: '0b51b592195d4a29c792',
+    cluster: 'us2',
+  };
+
   constructor(private _http: HttpClient) {
-    this.pusher = new Pusher( environment.pusher.key, {
-      cluster: environment.pusher.cluster,
+    this.pusher = new Pusher( this.pusherData.key, {
+      cluster: this.pusherData.cluster,
       encrypted: true
     });
     this.statusChannel = this.pusher.subscribe('server-status');
